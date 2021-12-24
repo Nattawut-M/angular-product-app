@@ -1,0 +1,35 @@
+<h2>Products</h2>
+<p>description of Products</p>
+
+<ul *ngFor="let product of products">
+  <li>
+    <a 
+      [title]="'click for detail of' + product.name"
+      [routerLink]="['/product', product.id]">
+      <strong>{{ product.name }} ({{ product.price }} baht)</strong>
+    </a>
+    <br />
+    <span *ngIf="product.description !== 'NOT SHOW'; else showInstead">
+      {{ product.description }}
+    </span>
+    <br />
+
+    <button (click)="share(product.id)" style="margin: 5 0 10px;">
+      share data
+    </button>
+
+    <app-product-alerts 
+      [product]="product"
+      (notify)="onNotifyProductSale(product)">
+    </app-product-alerts>
+
+  </li>
+</ul>
+
+<ng-template #showInstead>----</ng-template>
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
